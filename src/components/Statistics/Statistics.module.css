@@ -1,0 +1,11 @@
+.feedBackList {
+  display: flex;
+  max-width: 700px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.feedBackItem {
+  font-weight: 700;
+  font-size: 22px;
+}
