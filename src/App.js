@@ -1,61 +1,66 @@
 import React, { Component } from 'react';
-import Statistics from './components/Statistics';
-import FeedBackOptions from './components/FeedBackOptions';
-import Section from './components/Section';
-import Notification from './components/Notification';
+import shortid from 'shortid';
+import ContactForm from './components/ContactForm';
+import Filter from './components/Filter';
+import ContactList from './components/ContactList';
 
 class App extends Component {
   state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
   };
 
-  onLeaveFeedback = e => {
+  handleNameChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  formSubmitHandler = (name, number) => {
+    const contact = {
+      id: shortid.generate(),
+      name,
+      number,
+    };
     this.setState(prevState => ({
-      [e.target.name]: prevState[e.target.name] + 1,
+      contacts: [contact, ...prevState.contacts],
     }));
   };
-  countTotalFeedback(good, neutral, bad) {
-    const total = good + neutral + bad;
-    return total;
-  }
-  countPositiveFeedbackPercentage(good, neutral, bad) {
-    const positivePercentage =
-      (good / this.countTotalFeedback(good, neutral, bad)) * 100;
 
-    return Math.round(positivePercentage);
-  }
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+  };
 
   render() {
-    const { good, neutral, bad } = this.state;
-    const options = this.state;
-    const total = this.countTotalFeedback;
-    const positivePercentage = this.countPositiveFeedbackPercentage.bind(this);
-
+    const { filter } = this.state;
+    const visibleContacts = this.getVisibleContacts();
     return (
-      <>
-        <Section title="Please leave Feedback">
-          <FeedBackOptions
-            options={options}
-            onLeaveFeedback={this.onLeaveFeedback}
-          />
-        </Section>
-
-        {total(good, neutral, bad) ? (
-          <Section title="Statistics">
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={total}
-              positivePercentage={positivePercentage}
-            />
-          </Section>
-        ) : (
-          <Notification message="No feedback given" />
+      <div>
+        <h1>Phonebook</h1>
+        <ContactForm onSubmit={this.formSubmitHandler} />
+        <h2>Contacts</h2>
+        <Filter filter={filter} onInputChange={this.handleNameChange} />
+        {visibleContacts.length > 0 && (
+          <ContactList contacts={visibleContacts} />
         )}
-      </>
+        {/* <ul>
+          {visibleTodos.length > 0 &&
+            visibleTodos.map(({ id, name, number }) => (
+              <li key={id}>
+                {name} {number}
+              </li>
+            ))}
+        </ul> */}
+      </div>
     );
   }
 }
