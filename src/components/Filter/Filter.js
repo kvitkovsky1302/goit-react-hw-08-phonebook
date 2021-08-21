@@ -1,10 +1,12 @@
-// import styles from './Filter.module.css';
+import PropTypes from 'prop-types';
+import styles from './Filter.module.css';
 
 function Filter({ filter, onInputChange }) {
   return (
-    <label>
+    <label className={styles.label}>
       Find contacts by name
       <input
+        className={styles.input}
         type="text"
         name="filter"
         value={filter}
@@ -15,5 +17,10 @@ function Filter({ filter, onInputChange }) {
     </label>
   );
 }
+
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+};
 
 export default Filter;

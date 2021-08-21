@@ -3,15 +3,11 @@ import shortid from 'shortid';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
+import styles from './App.module.css';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -20,15 +16,29 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
+  repeatName = newName => {
+    return this.state.contacts.find(({ name }) => name === newName);
+  };
+
+  deleteContact = oldName => {
+    this.setState({
+      contacts: this.state.contacts.filter(({ name }) => name !== oldName),
+    });
+  };
+
   formSubmitHandler = (name, number) => {
-    const contact = {
-      id: shortid.generate(),
-      name,
-      number,
-    };
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
-    }));
+    if (!this.repeatName(name)) {
+      const contact = {
+        id: shortid.generate(),
+        name,
+        number,
+      };
+      this.setState(prevState => ({
+        contacts: [contact, ...prevState.contacts],
+      }));
+    } else {
+      alert(`${name} is already in contacts`);
+    }
   };
 
   getVisibleContacts = () => {
@@ -44,22 +54,17 @@ class App extends Component {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <div className={styles.wrapper}>
+        <h1 className={styles.title}>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitHandler} />
-        <h2>Contacts</h2>
+        <h2 className={styles.titleContacts}>Contacts</h2>
         <Filter filter={filter} onInputChange={this.handleNameChange} />
         {visibleContacts.length > 0 && (
-          <ContactList contacts={visibleContacts} />
+          <ContactList
+            contacts={visibleContacts}
+            onDeleteContact={this.deleteContact}
+          />
         )}
-        {/* <ul>
-          {visibleTodos.length > 0 &&
-            visibleTodos.map(({ id, name, number }) => (
-              <li key={id}>
-                {name} {number}
-              </li>
-            ))}
-        </ul> */}
       </div>
     );
   }
