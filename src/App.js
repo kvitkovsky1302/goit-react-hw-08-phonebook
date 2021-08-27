@@ -73,7 +73,7 @@ class App extends Component {
         <ContactForm onSubmit={this.formSubmitHandler} />
         <h2 className={styles.titleContacts}>Contacts</h2>
         <Filter filter={filter} onInputChange={this.handleNameChange} />
-        {visibleContacts.length > 0 && (
+        {visibleContacts && (
           <ContactList
             contacts={visibleContacts}
             onDeleteContact={this.deleteContact}
