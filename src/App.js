@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import shortid from 'shortid';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
@@ -68,4 +69,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect()(App);
