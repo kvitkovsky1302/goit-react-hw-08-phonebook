@@ -1,46 +1,33 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { contacts, filter } from '../redux/actions';
+import * as types from './types';
 
-const initialState = {
-  contacts: {
-    items: [],
-    filter: '',
-    name: '',
-    number: '',
-  },
-};
-
-const reducer = (state = initialState, { type, payload }) => {
+export const items = (state = [], { type, payload }) => {
   switch (type) {
-    case 'contacts':
-      return {
-        ...state,
-        contacts: {
-          ...state.contacts,
-          items: { payload, ...state.contacts.items },
-        },
-      };
+    case types.ADD_CONTACT:
+      return [payload, ...state];
 
-    case 'filter':
-      return {
-        ...state,
-        contacts: {
-          ...state.contacts,
-          filter: { payload },
-        },
-      };
-
-    case 'changeName':
-      return { ...state, contacts: { ...state.contacts, name: payload } };
-
-    case 'changeNumber':
-      return { ...state, contacts: { ...state.contacts, number: payload } };
+    case types.DELETE_CONTACT:
+      return state.filter(({ id }) => id !== payload);
 
     default:
       return state;
   }
 };
+
+export const filter = (state = '', { type, payload }) => {
+  switch (type) {
+    case types.CHANGE_FILTER:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+const contactsReducer = combineReducers({ items, filter });
+
+const reducer = combineReducers({ contacts: contactsReducer });
 
 const store = createStore(reducer, composeWithDevTools());
 
