@@ -1,36 +1,11 @@
-// import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-// import shortid from 'shortid';
+import { useSelector } from 'react-redux';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
 import styles from './App.module.css';
 
-function App({ contacts }) {
-  // const [contacts, setContacts] = useState(() => {
-  //   return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
-  // });
-
-  // const repeatName = newName => {
-  //   return contacts.find(contact => contact.name === newName);
-  // };
-
-  // const formSubmitHandler = (name, number) => {
-  //   if (!repeatName(name)) {
-  //     const contact = {
-  //       id: shortid.generate(),
-  //       name,
-  //       number,
-  //     };
-  //     setContacts(prev => [contact, ...prev]);
-  //   } else {
-  //     alert(`${name} is already in contacts`);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
+function App() {
+  const contacts = useSelector(state => state.contacts.items);
 
   return (
     <div className={styles.wrapper}>
@@ -47,8 +22,4 @@ function App({ contacts }) {
   );
 }
 
-const mapStateToProps = state => ({
-  contacts: state.contacts.items,
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

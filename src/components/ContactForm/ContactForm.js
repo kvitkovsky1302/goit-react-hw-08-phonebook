@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../redux/actions';
 import styles from './ContactForm.module.css';
 
-function ContactForm({ onSubmit }) {
+function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -16,27 +15,31 @@ function ContactForm({ onSubmit }) {
     setNumber(e.target.value);
   };
 
-  // const repeatName = newName => {
-  //   return contacts.find(contact => contact.name === newName);
-  // };
+  const contacts = useSelector(state => state.contacts.items);
 
-  // const formSubmitHandler = (name, number) => {
-  //   if (!repeatName(name)) {
-  //     const contact = {
-  //       id: shortid.generate(),
-  //       name,
-  //       number,
-  //     };
-  //     setContacts(prev => [contact, ...prev]);
-  //   } else {
-  //     alert(`${name} is already in contacts`);
-  //   }
-  // };
+  const dispatch = useDispatch();
+  const onSubmit = (name, number) => dispatch(actions.addContact(name, number));
+
+  const repeatName = newName => {
+    return contacts.find(contact => contact.name === newName);
+  };
+
+  const repeatNumber = newNumber => {
+    return contacts.find(contact => contact.number === newNumber);
+  };
+
+  const formSubmitHandler = (name, number) => {
+    if (!repeatName(name) && !repeatNumber(number)) {
+      onSubmit(name, number);
+    } else {
+      alert(`${name} or ${number} is already in contacts`);
+    }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit(name, number);
+    formSubmitHandler(name, number);
     setName('');
     setNumber('');
   };
@@ -76,12 +79,4 @@ function ContactForm({ onSubmit }) {
   );
 }
 
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) => dispatch(actions.addContact(name, number)),
-});
-
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default ContactForm;
