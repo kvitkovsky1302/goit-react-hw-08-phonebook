@@ -2,10 +2,11 @@ import { useSelector } from 'react-redux';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
+import { getItems } from './redux/selectors';
 import styles from './App.module.css';
 
 function App() {
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(getItems);
 
   return (
     <div className={styles.wrapper}>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../redux/actions';
+import { getItems } from '../../redux/selectors';
 import styles from './ContactForm.module.css';
 
 function ContactForm() {
@@ -15,7 +16,7 @@ function ContactForm() {
     setNumber(e.target.value);
   };
 
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(getItems);
 
   const dispatch = useDispatch();
   const onSubmit = (name, number) => dispatch(actions.addContact(name, number));

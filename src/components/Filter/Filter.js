@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/actions';
+import { getFilter } from '../../redux/selectors';
 import styles from './Filter.module.css';
 
 function Filter() {
-  const filter = useSelector(state => state.contacts.filter);
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
   const onInputChange = e => dispatch(actions.changeFilter(e.target.value));
