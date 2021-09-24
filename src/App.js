@@ -6,7 +6,7 @@ import Filter from './components/Filter';
 import ContactList from './components/ContactList';
 import styles from './App.module.css';
 
-function App() {
+function App({ contacts }) {
   // const [contacts, setContacts] = useState(() => {
   //   return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
   // });
@@ -36,15 +36,19 @@ function App() {
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Phonebook</h1>
       <ContactForm />
-      {/* {contacts.length > 0 && (
-        <> */}
-      <h2 className={styles.titleContacts}>Contacts</h2>
-      <Filter />
-      <ContactList />
-      {/* </>
-      )} */}
+      {contacts.length > 0 && (
+        <>
+          <h2 className={styles.titleContacts}>Contacts</h2>
+          <Filter />
+          <ContactList />
+        </>
+      )}
     </div>
   );
 }
 
-export default connect()(App);
+const mapStateToProps = state => ({
+  contacts: state.contacts.items,
+});
+
+export default connect(mapStateToProps)(App);

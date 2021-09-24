@@ -1,34 +1,39 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import * as types from './types';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import contactsReducer from './reducer';
 
-export const items = (state = [], { type, payload }) => {
-  switch (type) {
-    case types.ADD_CONTACT:
-      return [payload, ...state];
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+];
 
-    case types.DELETE_CONTACT:
-      return state.filter(({ id }) => id !== payload);
-
-    default:
-      return state;
-  }
+const contactsPersistConfig = {
+  key: 'contacts',
+  storage,
+  blacklist: ['filter'],
 };
 
-export const filter = (state = '', { type, payload }) => {
-  switch (type) {
-    case types.CHANGE_FILTER:
-      return payload;
+const store = configureStore({
+  reducer: {
+    contacts: persistReducer(contactsPersistConfig, contactsReducer),
+  },
+  middleware,
+  devTools: process.env.NODE_ENV === 'development',
+});
 
-    default:
-      return state;
-  }
-};
+const persistor = persistStore(store);
 
-const contactsReducer = combineReducers({ items, filter });
-
-const reducer = combineReducers({ contacts: contactsReducer });
-
-const store = createStore(reducer, composeWithDevTools());
-
-export default store;
+export { store, persistor };

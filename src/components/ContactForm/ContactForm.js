@@ -16,9 +16,25 @@ function ContactForm({ onSubmit }) {
     setNumber(e.target.value);
   };
 
+  // const repeatName = newName => {
+  //   return contacts.find(contact => contact.name === newName);
+  // };
+
+  // const formSubmitHandler = (name, number) => {
+  //   if (!repeatName(name)) {
+  //     const contact = {
+  //       id: shortid.generate(),
+  //       name,
+  //       number,
+  //     };
+  //     setContacts(prev => [contact, ...prev]);
+  //   } else {
+  //     alert(`${name} is already in contacts`);
+  //   }
+  // };
+
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(e);
 
     onSubmit(name, number);
     setName('');
