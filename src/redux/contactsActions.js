@@ -1,10 +1,11 @@
 import { createAction } from '@reduxjs/toolkit';
 import shortid from 'shortid';
 
-export const contacts = () => ({
-  type: 'contacts',
-  payload: JSON.parse(window.localStorage.getItem('contacts')) ?? [],
-});
+// export const contacts = () => ({
+//   type: 'contacts',
+//   payload:
+//     // JSON.parse(window.localStorage.getItem('contacts')) ?? [],
+// });
 
 export const changeFilter = createAction('changeFilter');
 

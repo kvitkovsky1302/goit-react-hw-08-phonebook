@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as actions from '../../redux/actions';
-import { getItems } from '../../redux/selectors';
+import { addContact } from '../../redux/contactsOperation';
+import { getItems } from '../../redux/contactsSelectors';
 import styles from './ContactForm.module.css';
 
 function ContactForm() {
@@ -19,7 +19,7 @@ function ContactForm() {
   const contacts = useSelector(getItems);
 
   const dispatch = useDispatch();
-  const onSubmit = (name, number) => dispatch(actions.addContact(name, number));
+  const onSubmit = (name, number) => dispatch(addContact({ name, number }));
 
   const repeatName = newName => {
     return contacts.find(contact => contact.name === newName);
