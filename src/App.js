@@ -17,7 +17,7 @@ import RegistrationPage from './Pages/RegistrationPage';
 import { getCurrentUser } from './redux/auth/authOperations';
 
 function App() {
-  // const contacts = useSelector(getItems);
+  //const contacts = useSelector(getItems);
   const dispatch = useDispatch();
 
   useEffect(() => {

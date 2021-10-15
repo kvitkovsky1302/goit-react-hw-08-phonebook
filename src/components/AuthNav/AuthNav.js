@@ -1,16 +1,16 @@
 import { NavLink } from 'react-router-dom';
-import styles from './AuthNavigation.module.css';
+import styles from './AuthNav.module.css';
 
-const AuthNavigation = () => (
+const AuthNav = () => (
   <>
-    <NavLink
+    {/* <NavLink
       to="/"
       exact
       className={styles.navLink}
       activeClassName={styles.navActiveLink}
     >
       Home
-    </NavLink>
+    </NavLink> */}
     <NavLink
       to="/register"
       className={styles.navLink}
@@ -25,14 +25,14 @@ const AuthNavigation = () => (
     >
       Login
     </NavLink>
-    <NavLink
+    {/* <NavLink
       to="/contacts"
       className={styles.navLink}
       activeClassName={styles.navActiveLink}
     >
       Contacts
-    </NavLink>
+    </NavLink> */}
   </>
 );
 
-export default AuthNavigation;
+export default AuthNav;

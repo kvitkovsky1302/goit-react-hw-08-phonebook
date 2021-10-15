@@ -1,11 +1,5 @@
 import axios from 'axios';
 import {
-  // registerError,
-  // registerSuccess,
-  // registerRequest,
-  // loginError,
-  // loginRequest,
-  // loginSuccess,
   logoutError,
   logoutRequest,
   logoutSuccess,
@@ -28,7 +22,7 @@ const token = {
 
 export const register = createAsyncThunk('auth/register', async credentials => {
   try {
-    const data = axios.post('/users/signup', credentials);
+    const { data } = await axios.post('/users/signup', credentials);
     token.set(data.token);
     return data;
   } catch (error) {
@@ -67,7 +61,7 @@ export const getCurrentUser = () => (dispatch, getState) => {
   }
   token.set(persistedToken);
 
-  dispatch(getCurrentUserRequest());
+  dispatch(getCurrentUserRequest(persistedToken));
 
   axios
     .get('/users/current')

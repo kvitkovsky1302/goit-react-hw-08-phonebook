@@ -6,7 +6,7 @@ const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
-  unset() {
+  unset(token) {
     axios.defaults.headers.common.Authorization = '';
   },
 };
@@ -23,6 +23,12 @@ const deleteContact = id => {
   return axios.delete(`/contacts/${id}`);
 };
 
+const editContact = ({ id, name, number }) => {
+  return axios
+    .patch(`/contacts/${id}`, { name, number })
+    .then(({ data }) => data);
+};
+
 const registerNewUser = async credentials => {
   return axios.post('/users/signup', credentials).then(({ data }) => {
     token.set(data.token);
@@ -30,9 +36,16 @@ const registerNewUser = async credentials => {
   });
 };
 
-const logInUser = async credentials => {
+const loginUser = credentials => {
   return axios.post('/users/login', credentials).then(({ data }) => {
     token.set(data.token);
+    return data;
+  });
+};
+
+const getCurrentUser = persistToken => {
+  token.set(persistToken);
+  return axios.get('/users/current').then(({ data }) => {
     return data;
   });
 };
@@ -42,19 +55,14 @@ const logOutUser = () => {
   token.unset();
 };
 
-const getCurrentUser = persistedToken => {
-  token.set(persistedToken);
-  return axios.get('users/current').then(({ data }) => data);
-};
-
-const contactsAPI = {
+const phoneBookApi = {
   getContacts,
   addContact,
   deleteContact,
+  editContact,
   registerNewUser,
-  logInUser,
-  logOutUser,
+  loginUser,
   getCurrentUser,
+  logOutUser,
 };
-
-export default contactsAPI;
+export default phoneBookApi;

@@ -1,15 +1,34 @@
-import AuthNavigation from '../AuthNavigation';
-import s from './Appbar.module.css';
+import { NavLink } from 'react-router-dom';
+import AuthNav from '../AuthNav';
+import styles from './Appbar.module.css';
 import { useSelector } from 'react-redux';
 import { isAuthorized } from '../../redux/auth/authSelectors';
-import UserNavigation from '../UserNavigation';
+import UserMenu from '../UserMenu';
 
 function Appbar() {
   const isAuthenticate = useSelector(isAuthorized);
   return (
-    <header className={s.header}>
-      <AuthNavigation />
-      {isAuthenticate && <UserNavigation />}
+    <header className={styles.header}>
+      <NavLink
+        to="/"
+        exact
+        className={styles.navLink}
+        activeClassName={styles.navActiveLink}
+      >
+        Home
+      </NavLink>
+
+      {isAuthenticate && (
+        <NavLink
+          to="/contacts"
+          className={styles.navLink}
+          activeClassName={styles.navActiveLink}
+        >
+          Contacts
+        </NavLink>
+      )}
+
+      {isAuthenticate ? <UserMenu /> : <AuthNav />}
     </header>
   );
 }

@@ -13,13 +13,13 @@ import storage from 'redux-persist/lib/storage';
 import contactsReducer from './contacts/contactsReducer';
 import authReducer from './auth/authReducer';
 
-const middleware = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-];
+// const middleware = [
+//   ...getDefaultMiddleware({
+//     serializableCheck: {
+//       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//     },
+//   }),
+// ];
 
 const authPersistConfigs = {
   key: 'token',
@@ -32,7 +32,11 @@ const store = configureStore({
     contacts: contactsReducer,
     auth: persistReducer(authPersistConfigs, authReducer),
   },
-  middleware,
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
   devTools: process.env.NODE_ENV === 'development',
 });
 

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserName } from '../../redux/auth/authSelectors';
 import { logout } from '../../redux/auth/authOperations';
-import styles from './UserNavigation.module.css';
+import styles from './UserMenu.module.css';
 
 const UserNavigation = () => {
   const userName = useSelector(getUserName);
