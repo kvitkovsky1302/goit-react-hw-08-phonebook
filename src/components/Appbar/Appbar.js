@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import AuthNav from '../AuthNav';
 import styles from './Appbar.module.css';
 import { useSelector } from 'react-redux';
@@ -8,28 +10,31 @@ import UserMenu from '../UserMenu';
 function Appbar() {
   const isAuthenticate = useSelector(isAuthorized);
   return (
-    <header className={styles.header}>
-      <NavLink
-        to="/"
-        exact
-        className={styles.navLink}
-        activeClassName={styles.navActiveLink}
-      >
-        Home
-      </NavLink>
-
-      {isAuthenticate && (
+    <>
+      <ReactNotification />
+      <header className={styles.header}>
         <NavLink
-          to="/contacts"
+          to="/"
+          exact
           className={styles.navLink}
           activeClassName={styles.navActiveLink}
         >
-          Contacts
+          Home
         </NavLink>
-      )}
 
-      {isAuthenticate ? <UserMenu /> : <AuthNav />}
-    </header>
+        {isAuthenticate && (
+          <NavLink
+            to="/contacts"
+            className={styles.navLink}
+            activeClassName={styles.navActiveLink}
+          >
+            Contacts
+          </NavLink>
+        )}
+
+        {isAuthenticate ? <UserMenu /> : <AuthNav />}
+      </header>
+    </>
   );
 }
 

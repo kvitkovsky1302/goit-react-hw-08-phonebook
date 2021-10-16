@@ -1,15 +1,16 @@
-import { useEffect, Suspense } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styles from './App.module.css';
 import PublicRoute from './components/PublicRoute/PublicRoute';
 import Appbar from './components/Appbar';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import HomePage from './Pages/HomePage';
-import LogInPage from './Pages/LogInPage';
-import ContactsPage from './Pages/ContactsPage';
-import RegistrationPage from './Pages/RegistrationPage';
 import { getCurrentUser } from './redux/auth/authOperations';
+
+const HomePage = lazy(() => import('./Pages/HomePage'));
+const RegistrationPage = lazy(() => import('./Pages/RegistrationPage'));
+const LogInPage = lazy(() => import('./Pages/LogInPage'));
+const ContactsPage = lazy(() => import('./Pages/ContactsPage'));
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <Appbar />
-      <Suspense fallback={<h1>Загрузка...</h1>}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
           <PublicRoute path="/" exact component={HomePage} />
           <PrivateRoute

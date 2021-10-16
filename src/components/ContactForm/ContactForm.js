@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contacts/contactsOperation';
 import { getItems } from '../../redux/contacts/contactsSelectors';
 import styles from './ContactForm.module.css';
+import { store } from 'react-notifications-component';
 
 function ContactForm() {
   const [name, setName] = useState('');
@@ -29,11 +30,27 @@ function ContactForm() {
     return contacts.find(contact => contact.number === newNumber);
   };
 
+  const showNotification = () => {
+    store.addNotification({
+      message: `Name: ${name} or Number: ${number} is already in contacts`,
+      type: 'danger',
+      insert: 'top',
+      container: 'top-center',
+      animationIn: ['animate__animated', 'animate__fadeIn'],
+      animationOut: ['animate__animated', 'animate__fadeOut'],
+      dismiss: {
+        duration: 3000,
+        onScreen: true,
+        pauseOnHover: true,
+      },
+    });
+  };
+
   const formSubmitHandler = (name, number) => {
     if (!repeatName(name) && !repeatNumber(number)) {
       onSubmit(name, number);
     } else {
-      alert(`${name} or ${number} is already in contacts`);
+      showNotification();
     }
   };
 
