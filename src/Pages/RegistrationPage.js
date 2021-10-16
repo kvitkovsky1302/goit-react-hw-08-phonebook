@@ -17,7 +17,7 @@ function RegistrationPage() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    //   const { name, email, password } = state;
+
     dispatch(register(state));
   };
 

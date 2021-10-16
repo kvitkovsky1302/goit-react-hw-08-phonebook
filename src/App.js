@@ -1,12 +1,7 @@
 import { useEffect, Suspense } from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-// import ContactForm from './components/ContactForm';
-// import Filter from './components/Filter';
-// import ContactList from './components/ContactList';
-// import { getItems } from './redux/contacts/contactsSelectors';
 import styles from './App.module.css';
-// import { fetchContacts } from './redux/contacts/contactsOperation';
 import PublicRoute from './components/PublicRoute/PublicRoute';
 import Appbar from './components/Appbar';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -17,7 +12,6 @@ import RegistrationPage from './Pages/RegistrationPage';
 import { getCurrentUser } from './redux/auth/authOperations';
 
 function App() {
-  //const contacts = useSelector(getItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,7 +52,3 @@ function App() {
 }
 
 export default App;
-
-//компонент навигации логин, регистрация, хом -----
-//когда юзер авторизирован в навигацию вместо кнопок логин и регистрация вывести кнопку логаут
-//контакты в один компонент и рендерить на странице контактс

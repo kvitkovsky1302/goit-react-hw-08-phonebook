@@ -1,9 +1,5 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
 import {
-  // registerError,
-  // registerSuccess,
-  // loginError,
-  // loginSuccess,
   logoutError,
   logoutSuccess,
   getCurrentUserError,

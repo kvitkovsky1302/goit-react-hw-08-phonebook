@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from './ContactList.module.css';
 import { getVisibleContacts } from '../../redux/contacts/contactsSelectors';
 import { deleteContact } from '../../redux/contacts/contactsOperation';
-// import * as actions from '../../redux/contactsActions';
 
 function ContactList() {
   const contacts = useSelector(getVisibleContacts);
