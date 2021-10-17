@@ -21,6 +21,10 @@ function LogInPage() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(login(state));
+    setState({
+      email: '',
+      password: '',
+    });
   };
 
   return (

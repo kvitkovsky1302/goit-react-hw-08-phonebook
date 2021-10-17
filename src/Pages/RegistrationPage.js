@@ -20,6 +20,11 @@ function RegistrationPage() {
     e.preventDefault();
 
     dispatch(register(state));
+    setState({
+      email: '',
+      password: '',
+      name: '',
+    });
   };
 
   return (
