@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../redux/auth/authOperations';
+import styles from './RegistrationPage.module.css';
 
 function RegistrationPage() {
   const [state, setState] = useState({
@@ -22,46 +23,55 @@ function RegistrationPage() {
   };
 
   return (
-    <div>
-      <h1
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        Registration
-      </h1>
-      <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="">
-          <p>Введите имя</p>
-          <input
-            onInput={handleChange}
-            name="name"
-            value={state.name}
-            type="text"
-          />
-        </label>
-        <label htmlFor="">
-          <p>Введите email</p>
-          <input
-            onInput={handleChange}
-            value={state.email}
-            name="email"
-            type="text"
-          />
-        </label>
-        <label htmlFor="">
-          <p>Введите пароль</p>
-          <input
-            onInput={handleChange}
-            value={state.password}
-            name="password"
-            type="password"
-          />
-        </label>
-        <div style={{ marginTop: '20px' }}>
-          <button>Registration</button>
-        </div>
-      </form>
+    <div className={`${styles.grid} ${styles.align__item}`}>
+      <div className={styles.register}>
+        <h2>Registration</h2>
+        <form
+          action=""
+          method="post"
+          className={styles.form}
+          onSubmit={handleSubmit}
+        >
+          <div className={styles.form__field}>
+            <input
+              className={styles.input}
+              onInput={handleChange}
+              name="name"
+              value={state.name}
+              type="text"
+              placeholder="enter your name"
+            />
+          </div>
+          <div className={styles.form__field}>
+            <input
+              className={styles.input}
+              onInput={handleChange}
+              value={state.email}
+              name="email"
+              type="email"
+              placeholder="info@mailaddress.com"
+            />
+          </div>
+          <div className={styles.form__field}>
+            <input
+              className={styles.input}
+              onInput={handleChange}
+              value={state.password}
+              placeholder="password"
+              name="password"
+              type="password"
+            />
+          </div>
+          {/* </label> */}
+          <div className={styles.form__field}>
+            <input
+              className={styles.input}
+              type="submit"
+              value="Registration"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ const HomePage = () => {
           textAlign: 'center',
         }}
       >
-        Home page
+        Please, register to use the PhoneBook
       </h1>
     </div>
   );

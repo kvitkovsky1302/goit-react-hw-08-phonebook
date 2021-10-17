@@ -9,11 +9,11 @@ const UserNavigation = () => {
 
   return (
     <div className={styles.userMenuWrapper}>
-      <p className={styles.text}>Welcome {userName}</p>
+      {/* <p className={styles.text}>Welcome {userName}</p> */}
       <button
         type="button"
         onClick={() => dispatch(logout())}
-        className={styles.button}
+        className={styles.btnLogOut}
       >
         Logout
       </button>

@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import AuthNav from '../AuthNav';
 import styles from './Appbar.module.css';
@@ -11,7 +10,6 @@ function Appbar() {
   const isAuthenticate = useSelector(isAuthorized);
   return (
     <>
-      <ReactNotification />
       <header className={styles.header}>
         <NavLink
           to="/"

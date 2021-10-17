@@ -1,10 +1,14 @@
 .wrapper {
   position: relative;
-  max-width: 400px;
+  min-width: 400px;
+  max-width: 500px;
   margin: 50px auto 0;
   background: white;
   border-radius: 30px;
-  padding: 50px;
+  /* padding: 50px; */
+  padding: 2rem 2rem;
+  box-shadow: 0 0 250px #000;
+  background-color: #354152;
 }
 
 .title {

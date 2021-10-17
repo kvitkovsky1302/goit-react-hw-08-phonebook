@@ -16,9 +16,9 @@ const ContactsPage = () => {
   return (
     <>
       <ContactForm />
+      <Filter />
       {visibleContacts.length > 0 ? (
         <>
-          <Filter />
           <ContactList />
         </>
       ) : (

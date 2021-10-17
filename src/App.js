@@ -1,5 +1,6 @@
 import { useEffect, Suspense, lazy } from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
+import ReactNotification from 'react-notifications-component';
 import { useDispatch } from 'react-redux';
 import styles from './App.module.css';
 import PublicRoute from './components/PublicRoute/PublicRoute';
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
+      <ReactNotification />
       <Appbar />
       <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
