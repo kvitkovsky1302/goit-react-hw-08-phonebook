@@ -1,6 +1,4 @@
 import { NavLink } from 'react-router-dom';
-// import { Nav, Container, Navbar, Tabs, Tab } from 'react-bootstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './AuthNav.module.css';
 
 const AuthNav = () => (

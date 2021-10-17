@@ -17,7 +17,6 @@ function ContactList() {
             <p>{name}</p>
             <p>{number}</p>
           </div>
-          {/* {name} --- {number} */}
           <button
             className={styles.btnContact}
             onClick={() => onDeleteContact(id)}

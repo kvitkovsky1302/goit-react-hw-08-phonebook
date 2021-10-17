@@ -4,15 +4,6 @@
   flex-direction: row;
 }
 
-/* .align__item .align--start {
-  align-self: flex-start;
-  background-color: var(--base-bgcolor);
-}
-
-.align__item .align--end {
-  align-self: flex-end;
-} */
-
 .input {
   border: 0;
   font: inherit;

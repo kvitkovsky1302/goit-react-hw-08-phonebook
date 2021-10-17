@@ -28,13 +28,7 @@ function LogInPage() {
   return (
     <div className={`${styles.grid} ${styles.align__item}`}>
       <div className={styles.register}>
-        <h2
-        // style={{
-        //   textAlign: 'center',
-        // }}
-        >
-          Login
-        </h2>
+        <h2>Login</h2>
 
         <form
           action=""

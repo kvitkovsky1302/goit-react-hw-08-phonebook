@@ -66,18 +66,10 @@ function ContactForm() {
     <div className={`${styles.grid} ${styles.align__item}`}>
       <div className={styles.register}>
         <h2>Contacts</h2>
-        <form
-          className={styles.form}
-          // className={styles.form}
-          onSubmit={e => handleSubmit(e)}
-        >
-          <div
-            className={styles.form__field}
-            // className={styles.label}
-          >
+        <form className={styles.form} onSubmit={e => handleSubmit(e)}>
+          <div className={styles.form__field}>
             <input
               className={styles.input}
-              // className={styles.inputForm}
               type="text"
               name="name"
               value={name}
@@ -88,13 +80,9 @@ function ContactForm() {
               placeholder="Enter your name"
             />
           </div>
-          <div
-            className={styles.form__field}
-            // className={styles.label}
-          >
+          <div className={styles.form__field}>
             <input
               className={styles.input}
-              // className={styles.inputForm}
               type="tel"
               name="number"
               value={number}
@@ -108,9 +96,6 @@ function ContactForm() {
           <div className={styles.form__field}>
             <input className={styles.input} type="submit" value="Add contact" />
           </div>
-          {/* <button className={styles.btnForm} type="submit">
-            Add contact
-          </button> */}
         </form>
       </div>
     </div>

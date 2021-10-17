@@ -8,7 +8,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* width: 100%; */
   max-width: var(--grid-max-width);
   width: var(--grid-width);
   font: inherit;
