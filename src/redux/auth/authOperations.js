@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {
+  registerError,
+  loginError,
   logoutError,
   logoutRequest,
   logoutSuccess,
@@ -7,6 +9,7 @@ import {
   getCurrentUserRequest,
   getCurrentUserSuccess,
 } from './authActions';
+import { useDispatch } from 'react-redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
@@ -26,6 +29,8 @@ export const register = createAsyncThunk('auth/register', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
+    const dispatch = useDispatch();
+    dispatch(registerError(error.message));
     console.log(error.message);
   }
 });
@@ -36,6 +41,8 @@ export const login = createAsyncThunk('auth/login', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
+    const dispatch = useDispatch();
+    dispatch(loginError(error.message));
     console.log(error.message);
   }
 });
